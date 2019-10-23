@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.entity.VideoMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.Video" >
+    <id column="vid" property="vid" jdbcType="INTEGER" />
+    <result column="cuid" property="cuid" jdbcType="INTEGER" />
+    <result column="vname" property="vname" jdbcType="VARCHAR" />
+    <result column="vtime" property="vtime" jdbcType="INTEGER" />
+    <result column="vurl" property="vurl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    vid, cuid, vname, vtime, vurl
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_video
+    where vid = #{vid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_video
+    where vid = #{vid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Video" >
+    insert into t_video (vid, cuid, vname, 
+      vtime, vurl)
+    values (#{vid,jdbcType=INTEGER}, #{cuid,jdbcType=INTEGER}, #{vname,jdbcType=VARCHAR}, 
+      #{vtime,jdbcType=INTEGER}, #{vurl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Video" >
+    insert into t_video
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        vid,
+      </if>
+      <if test="cuid != null" >
+        cuid,
+      </if>
+      <if test="vname != null" >
+        vname,
+      </if>
+      <if test="vtime != null" >
+        vtime,
+      </if>
+      <if test="vurl != null" >
+        vurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vid != null" >
+        #{vid,jdbcType=INTEGER},
+      </if>
+      <if test="cuid != null" >
+        #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="vname != null" >
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vtime != null" >
+        #{vtime,jdbcType=INTEGER},
+      </if>
+      <if test="vurl != null" >
+        #{vurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Video" >
+    update t_video
+    <set >
+      <if test="cuid != null" >
+        cuid = #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="vname != null" >
+        vname = #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vtime != null" >
+        vtime = #{vtime,jdbcType=INTEGER},
+      </if>
+      <if test="vurl != null" >
+        vurl = #{vurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Video" >
+    update t_video
+    set cuid = #{cuid,jdbcType=INTEGER},
+      vname = #{vname,jdbcType=VARCHAR},
+      vtime = #{vtime,jdbcType=INTEGER},
+      vurl = #{vurl,jdbcType=VARCHAR}
+    where vid = #{vid,jdbcType=INTEGER}
+  </update>
+</mapper>

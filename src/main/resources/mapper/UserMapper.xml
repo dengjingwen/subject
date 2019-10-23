@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.entity.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.User" >
+    <id column="usid" property="usid" jdbcType="INTEGER" />
+    <result column="uname" property="uname" jdbcType="VARCHAR" />
+    <result column="code_name" property="codeName" jdbcType="VARCHAR" />
+    <result column="upwd" property="upwd" jdbcType="VARCHAR" />
+    <result column="Head_portrait" property="headPortrait" jdbcType="VARCHAR" />
+    <result column="autograph" property="autograph" jdbcType="VARCHAR" />
+    <result column="uphone" property="uphone" jdbcType="VARCHAR" />
+    <result column="uposition" property="uposition" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    usid, uname, code_name, upwd, Head_portrait, autograph, uphone, uposition, address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where usid = #{usid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_user
+    where usid = #{usid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.User" >
+    insert into t_user (usid, uname, code_name, 
+      upwd, Head_portrait, autograph, 
+      uphone, uposition, address
+      )
+    values (#{usid,jdbcType=INTEGER}, #{uname,jdbcType=VARCHAR}, #{codeName,jdbcType=VARCHAR}, 
+      #{upwd,jdbcType=VARCHAR}, #{headPortrait,jdbcType=VARCHAR}, #{autograph,jdbcType=VARCHAR}, 
+      #{uphone,jdbcType=VARCHAR}, #{uposition,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.User" >
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usid != null" >
+        usid,
+      </if>
+      <if test="uname != null" >
+        uname,
+      </if>
+      <if test="codeName != null" >
+        code_name,
+      </if>
+      <if test="upwd != null" >
+        upwd,
+      </if>
+      <if test="headPortrait != null" >
+        Head_portrait,
+      </if>
+      <if test="autograph != null" >
+        autograph,
+      </if>
+      <if test="uphone != null" >
+        uphone,
+      </if>
+      <if test="uposition != null" >
+        uposition,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usid != null" >
+        #{usid,jdbcType=INTEGER},
+      </if>
+      <if test="uname != null" >
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null" >
+        #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null" >
+        #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null" >
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null" >
+        #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="uposition != null" >
+        #{uposition,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.User" >
+    update t_user
+    <set >
+      <if test="uname != null" >
+        uname = #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="codeName != null" >
+        code_name = #{codeName,jdbcType=VARCHAR},
+      </if>
+      <if test="upwd != null" >
+        upwd = #{upwd,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null" >
+        Head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="autograph != null" >
+        autograph = #{autograph,jdbcType=VARCHAR},
+      </if>
+      <if test="uphone != null" >
+        uphone = #{uphone,jdbcType=VARCHAR},
+      </if>
+      <if test="uposition != null" >
+        uposition = #{uposition,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where usid = #{usid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.User" >
+    update t_user
+    set uname = #{uname,jdbcType=VARCHAR},
+      code_name = #{codeName,jdbcType=VARCHAR},
+      upwd = #{upwd,jdbcType=VARCHAR},
+      Head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      autograph = #{autograph,jdbcType=VARCHAR},
+      uphone = #{uphone,jdbcType=VARCHAR},
+      uposition = #{uposition,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where usid = #{usid,jdbcType=INTEGER}
+  </update>
+</mapper>

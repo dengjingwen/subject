@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.IAskDao" >
+  <resultMap id="BaseResultMap" type="com.entity.Ask" >
+    <id column="askid" property="askid" jdbcType="INTEGER" />
+    <result column="cuid" property="cuid" jdbcType="INTEGER" />
+    <result column="asubject" property="asubject" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    askid, cuid, asubject
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ask
+    where askid = #{askid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_ask
+    where askid = #{askid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.entity.Ask" >
+    insert into t_ask (askid, cuid, asubject
+      )
+    values (#{askid,jdbcType=INTEGER}, #{cuid,jdbcType=INTEGER}, #{asubject,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Ask" >
+    insert into t_ask
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="askid != null" >
+        askid,
+      </if>
+      <if test="cuid != null" >
+        cuid,
+      </if>
+      <if test="asubject != null" >
+        asubject,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="askid != null" >
+        #{askid,jdbcType=INTEGER},
+      </if>
+      <if test="cuid != null" >
+        #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="asubject != null" >
+        #{asubject,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Ask" >
+    update t_ask
+    <set >
+      <if test="cuid != null" >
+        cuid = #{cuid,jdbcType=INTEGER},
+      </if>
+      <if test="asubject != null" >
+        asubject = #{asubject,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where askid = #{askid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Ask" >
+    update t_ask
+    set cuid = #{cuid,jdbcType=INTEGER},
+      asubject = #{asubject,jdbcType=VARCHAR}
+    where askid = #{askid,jdbcType=INTEGER}
+  </update>
+</mapper>
